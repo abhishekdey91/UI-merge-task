@@ -9,7 +9,7 @@
 }
 
 .col-card {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 19px 0;
   border-radius: 5px;
   box-shadow: 2px 2px 2px dimgrey;
@@ -87,4 +87,14 @@ input {
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
+}
+
+.row.merge-options{
+  position: absolute;
+  top: 45%;
+  left: 399px;
+  border: 8px solid red;
+  background-color: antiquewhite;
+  width: 500px;
+    background-color: antiquewhite;
 }
