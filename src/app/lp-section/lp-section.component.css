@@ -12,9 +12,14 @@
   /* border: 1px solid black; */
   margin: 19px 0;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px dimgrey;
   cursor: pointer;
   padding: 10px 0;
+}
+
+.col-card .col-lg-12 {
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  white-space: nowrap;
 }
 
 .mb-16 {
@@ -32,12 +37,12 @@
 }
 
 .records-data td {
-  max-width: 300px;
-  border-top: 1px solid black;
+  max-width: 200px;
   border-bottom: 1px solid black;
   overflow: hidden;
   text-overflow: ellipsis;  
   white-space: nowrap;
+  padding: 5px;
 }
 
 .active {
@@ -56,6 +61,7 @@
 
 .cardView {
   clear: both;
+  margin: 50px 10px;
 }
 
 .recordView {
@@ -90,11 +96,27 @@ input {
 }
 
 .row.merge-options{
-  position: absolute;
-  top: 45%;
-  left: 399px;
-  border: 8px solid red;
+  position: fixed;
+  top: 40%;
+  left: 45%;
+  /* border: 8px solid red; */
   background-color: antiquewhite;
   width: 500px;
-    background-color: antiquewhite;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  padding: 40px 10px;
+  border-radius: 12px;
+}
+
+.overlay {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.records-data td {
+  max-width: 200px;
+  border-bottom: 1px solid black;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  white-space: nowrap;
+  padding: 5px;
 }

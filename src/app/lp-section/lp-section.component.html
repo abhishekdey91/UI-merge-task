@@ -1,22 +1,21 @@
-<div class="row cardView">
-  <div style="width:100%;">
+<div class="row1 cardView" [ngClass]="{'overlay' : mergeFix}">
+  <div style="margin: 0 10px;">
     <div class="col-lg-12 records-data">
         <div class="row">
-        <td class="col-lg-2">Policy Number</td>
-        <td class="col-lg-2">Status</td>
-        <td class="col-lg-2">Group Name</td>
-        <td class="col-lg-1">Notes</td>
-        <td class="col-lg-1">Effective Date</td>
-        <td class="col-lg-1">TPA</td>
-        <td class="col-lg-1">Underwriter</td>
-        <td class="col-lg-1" >Producer</td>
-        <td class="col-lg-1" >Merge UI</td>
-      </div>
+          <td class="col-lg-2">Policy Number</td>
+          <td class="col-lg-2">Status</td>
+          <td class="col-lg-2">Group Name</td>
+          <td class="col-lg-1">Notes</td>
+          <td class="col-lg-1">Effective Date</td>
+          <td class="col-lg-1">TPA</td>
+          <td class="col-lg-1">Underwriter</td>
+          <td class="col-lg-1">Producer</td>
+          <td class="col-lg-1">Merge UI</td>
+        </div>
     </div>
-  </div>
-      <div *ngFor="let grpDa of currentDataList; let i = index;">
-        <div class="col-card" *ngIf="grpDa.parentId !==null && grpDa.childId === null">
-          <td class="col-lg-2 text-style" title="{{grpDa.policyNumber}}">{{grpDa.policyNumber}}Parent</td>
+    <div *ngFor="let grpDa of currentDataList; let i = index;" class="records-data col-lg-12">
+      <div class="row" *ngIf="grpDa.parentIndex !==null && grpDa.childId === null">
+          <td class="col-lg-2 text-style" title="{{grpDa.policyNumber}}">{{grpDa.policyNumber}}</td>
           <td class="col-lg-2" title="{{grpDa.status}}">{{grpDa.status}}</td>
           <td class="col-lg-2" title="{{grpDa.groupName}}">{{grpDa.groupName}}</td>
           <td class="col-lg-1 text-style" title="{{grpDa.notes}}">{{grpDa.notes}}</td>
@@ -24,11 +23,13 @@
           <td class="col-lg-1" title="{{grpDa.tpa}}">{{grpDa.tpa}}</td>
           <td class="col-lg-1" title="{{grpDa.underwriter}}">{{grpDa.underwriter}}</td>
           <td class="col-lg-1" title="{{grpDa.producer}}">{{grpDa.producer}}</td>
-          <td class="col-lg-1" title="Merge List" (click)="apply(grpDa.parentId)">::</td>
-        </div>
-        <div *ngFor="let grpDa1 of currentDataList;">
-          <div class="col-card" *ngIf="grpDa1.childId === i && grpDa.parentId === grpDa1.childId && grpDa1.childId !== null">
-            <td class="col-lg-2 text-style" title="{{grpDa1.policyNumber}}">{{grpDa1.policyNumber}}Child </td>
+          <td class="col-lg-1" title="Merge List" (click)="apply(grpDa.parentIndex)">+</td>
+      
+      </div>
+      <div *ngFor="let grpDa1 of currentDataList;" class="records-data col-lg-12">
+        <div class="row"
+          *ngIf="grpDa1.childId === i && grpDa.parentIndex === grpDa1.childId && grpDa1.childId !== null">
+            <td class="col-lg-2 text-style" title="{{grpDa1.policyNumber}}">{{grpDa1.policyNumber}} </td>
             <td class="col-lg-2" title="{{grpDa1.status}}">{{grpDa1.status}}</td>
             <td class="col-lg-2" title="{{grpDa1.groupName}}">{{grpDa1.groupName}}</td>
             <td class="col-lg-1 text-style" title="{{grpDa1.notes}}">{{grpDa1.notes}}</td>
@@ -36,16 +37,21 @@
             <td class="col-lg-1" title="{{grpDa1.tpa}}">{{grpDa1.tpa}}</td>
             <td class="col-lg-1" title="{{grpDa1.underwriter}}">{{grpDa1.underwriter}}</td>
             <td class="col-lg-1" title="{{grpDa1.producer}}">{{grpDa1.producer}}</td>
-          </div>
+            <td class="col-lg-1" title="Un Merge List" (click)="resetChildGroup1(grpDa1.oldId)">-</td>
+        </div>
       </div>
     </div>
+  </div>
 </div>
 
 
 <div class="row merge-options" *ngIf="mergeFix">
-  <div class="col-lg-3" *ngFor="let key of fixes; let id = index">
-    <input type="checkbox" id="{{key}}" name="{{key}}" value="{{key}}" (change)="updateCheck($event,id)"/>
-    <label for="{{key}}"> &nbsp;&nbsp;{{key | uppercase}}</label>
+  <div class="row">
+    <div class="col-lg-4" style="display: flex;" *ngFor="let key of fixes; let id = index">
+      <input type="checkbox" id="{{key}}" name="{{key}}" value="{{key}}" (change)="updateCheck($event,id)" />
+      <label for="{{key}}" style="margin: 0;"> &nbsp;&nbsp;{{key | uppercase}}</label>&nbsp;
+    </div>
   </div>
-  <button (click)="this.checked.filter.length && applyMerge()">Merge</button>
+  <button class="col-lg-4" style="margin-top: 20px;" (click)="applyMerge()">Merge
+    Row</button>
 </div>
