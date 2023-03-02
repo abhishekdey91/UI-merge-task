@@ -64,7 +64,6 @@ export class LpSectionComponent implements OnInit {
     return this.grpItemKeys.filter((data) => id !== data);
   }
 
-
   apply(parentIndex) {
     this.mergeFix = !this.mergeFix;
     this.parentIndex = parentIndex;
@@ -76,8 +75,7 @@ export class LpSectionComponent implements OnInit {
     this.resetChildGroup(this.parentIndex);
     //console.log(this.currentDataList);
     const X1 = this.currentDataList.filter((data, index) => index !== this.parentIndex && this.groupCheck(data));
-    
-    this.selectedRow['isGroup'] = !!X1.length;
+    this.selectedRow['isGroup'] = X1.length;
     X1.map((data) => { data.childId = this.parentIndex,  data.parentIndex = null; });
     this.apply(this.parentIndex);
     //console.log(X1);
@@ -97,15 +95,22 @@ export class LpSectionComponent implements OnInit {
   resetChildGroup1(parentIndex) {
     //let id = this.currentDataList.length;
     const a = this.currentDataList[parentIndex];
+    const a1 = a['childId'];
     a.childId = null;
     //a.childIndex = null;
     a.parentIndex = a.oldId;
+    this.currentDataList[a1]['isGroup'] = --this.currentDataList[a1].isGroup;
     //a.parentIndex = a.oldId;
     //console.log(this.currentDataList);
   }
 
   groupCheck(data) {
-    const filterList = this.checked.filter((dat, index) => dat && data.childId === null && !data.isGroup  && data.parentIndex !==null && data[this.fixes[index]] === this.selectedRow[this.fixes[index]]);
+    const filterList = this.checked.filter((dat, index) => {
+      if(this.fixes[index] !== 'effectiveDate') {
+        return dat && data.childId === null && !data.isGroup  && data.parentIndex !==null && (data[this.fixes[index]] === this.selectedRow[this.fixes[index]] )
+      } else { return dat && data.childId === null && !data.isGroup  && data.parentIndex !==null && data[this.fixes[index]].toDateString() === this.selectedRow[this.fixes[index]].toDateString()
+      }
+    });
     //console.log(filterList);
     return filterList.length === this.checked.filter((data) => data).length && filterList.length > 0;
   }
