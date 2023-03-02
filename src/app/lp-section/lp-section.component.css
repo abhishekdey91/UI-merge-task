@@ -61,7 +61,7 @@
 
 .cardView {
   clear: both;
-  margin: 50px 10px;
+  margin: 0px 10px;
 }
 
 .recordView {
@@ -98,7 +98,7 @@ input {
 .row.merge-options{
   position: fixed;
   top: 40%;
-  left: 45%;
+  left: 35%;
   /* border: 8px solid red; */
   background-color: antiquewhite;
   width: 500px;
